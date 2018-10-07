@@ -32,20 +32,15 @@ import java.util.*;
 public class PageOneStepCVRSpark {
     public static void main(String[] args) {
 
-//        //1 构造spark上下文
-//        SparkConf sparkConf = new SparkConf()
-//                .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer");
-
-//        SparkUtil.setMaster(sparkConf);
-
-        //.master(Constants.SPARK_LOCAL)
+        //1. 创建sparkContext 上下文
         SparkSession spark = SparkSession
                 .builder()
+                .master(Constants.SPARK_LOCAL)
                 .appName(Constants.SPARK_APP_NAME_PAGE)
                 .enableHiveSupport()
                 .getOrCreate();
         //2 生成模拟数据
-        //MockData.mock(spark);
+        MockData.mock(spark);
         //3 查询任务获取任务的参数
         TaskDAO taskDAO = DAOFactory.getTaskDAO();
         //查询出对应的需要执行的任务
